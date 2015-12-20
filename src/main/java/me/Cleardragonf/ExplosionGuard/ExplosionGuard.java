@@ -4,6 +4,7 @@ package me.Cleardragonf.ExplosionGuard;
 import com.google.inject.Inject;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
+import org.spongepowered.api.Game;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.data.Transaction;
 import org.spongepowered.api.entity.explosive.PrimedTNT;
@@ -35,7 +36,7 @@ public class ExplosionGuard {
         public Logger getLogger(){
             return logger;
         }
-    
+        
         @Listener
         public void enable(GameStartingServerEvent event)
         {
@@ -49,6 +50,7 @@ public class ExplosionGuard {
         @Inject
         @DefaultConfig(sharedRoot = false)
         ConfigurationLoader<CommentedConfigurationNode> configManager;
+        
         @Listener
         public void onExplosionEvent(ExplosionEvent.Pre event) {
             /*--
@@ -93,7 +95,7 @@ public class ExplosionGuard {
                     if (ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Undo_Creeper_Explosiong").getString().equalsIgnoreCase("yes")){
                         bang.getTransactions();
                         final Mend mend = new Mend(bang.getTransactions().stream().map(Transaction::getOriginal).collect(Collectors.toSet()));
-                        bang.getGame().getScheduler().createTaskBuilder()
+                        ((Game) bang).getScheduler().createTaskBuilder()
                                 .delay(ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Creeper's_Rollback_Time").getLong(), TimeUnit.SECONDS)
                                 .name("Explosion Repair Task")
                                 .execute(mend::heal)
@@ -106,7 +108,7 @@ public class ExplosionGuard {
                     if (ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Undo_TNT_Explosion").getString().equalsIgnoreCase("yes")){
                         bang.getTransactions();
                         final Mend mend = new Mend(bang.getTransactions().stream().map(Transaction::getOriginal).collect(Collectors.toSet()));
-                        bang.getGame().getScheduler().createTaskBuilder()
+                        ((Game) bang).getScheduler().createTaskBuilder()
                                 .delay(ConfigurationManager.getInstance().getConfig().getNode("Undo?", "TNT't_Rollback_Time").getLong(), TimeUnit.SECONDS)
                                 .name("Explosion Repair Task")
                                 .execute(mend::heal)
@@ -119,7 +121,7 @@ public class ExplosionGuard {
                     if (ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Undo_Ghast's_Explosion").getString().equalsIgnoreCase("yes")){
                         bang.getTransactions();
                         final Mend mend = new Mend(bang.getTransactions().stream().map(Transaction::getOriginal).collect(Collectors.toSet()));
-                        bang.getGame().getScheduler().createTaskBuilder()
+                        ((Game) bang).getScheduler().createTaskBuilder()
                                 .delay(ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Ghast_Rollback_Time").getLong(), TimeUnit.SECONDS)
                                 .name("Explosion Repair Task")
                                 .execute(mend::heal)
