@@ -1,0 +1,12 @@
+apply plugin: 'java'
+repositories {
+    mavenCentral()
+    maven {
+        name = 'sponge'
+        url = 'http://repo.spongepowered.org/maven'
+    }
+}
+
+dependencies {
+    compile 'org.spongepowered:spongeapi:5.1.0-SNAPSHOT'
+}
