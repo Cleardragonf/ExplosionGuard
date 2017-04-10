@@ -1,12 +1,10 @@
 package me.Cleardragonf.ExplosionGuard;
 
 
-import com.google.inject.Inject;
-import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.loader.ConfigurationLoader;
-import org.spongepowered.api.Game;
+import java.io.File;
+import java.util.logging.Logger;
+
 import org.spongepowered.api.config.DefaultConfig;
-import org.spongepowered.api.data.Transaction;
 import org.spongepowered.api.entity.explosive.PrimedTNT;
 import org.spongepowered.api.entity.living.monster.Creeper;
 import org.spongepowered.api.entity.living.monster.Ghast;
@@ -17,10 +15,10 @@ import org.spongepowered.api.event.item.inventory.DropItemEvent;
 import org.spongepowered.api.event.world.ExplosionEvent;
 import org.spongepowered.api.plugin.Plugin;
 
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import com.google.inject.Inject;
+
+import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.loader.ConfigurationLoader;
  
 @Plugin(id = "Explosion Guard", name = "ExplosionGuard", version = "Beta.1.0")
 
@@ -93,39 +91,21 @@ public class ExplosionGuard {
             if (bang.getCause().first(Creeper.class).isPresent()) {
                 if (ConfigurationManager.getInstance().getConfig().getNode("Explosions", "Creeper").getString().equalsIgnoreCase("false")){
                     if (ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Undo_Creeper_Explosiong").getString().equalsIgnoreCase("yes")){
-                        bang.getTransactions();
-                        final Mend mend = new Mend(bang.getTransactions().stream().map(Transaction::getOriginal).collect(Collectors.toSet()));
-                        ((Game) bang).getScheduler().createTaskBuilder()
-                                .delay(ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Creeper's_Rollback_Time").getLong(), TimeUnit.SECONDS)
-                                .name("Explosion Repair Task")
-                                .execute(mend::heal)
-                                .submit(this);
-                    }
+                    	
+                        }
                 }
             }
             if (bang.getCause().first(PrimedTNT.class).isPresent()) {
                 if (ConfigurationManager.getInstance().getConfig().getNode("Explosions", "TNT").getString().equalsIgnoreCase("false")){
                     if (ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Undo_TNT_Explosion").getString().equalsIgnoreCase("yes")){
-                        bang.getTransactions();
-                        final Mend mend = new Mend(bang.getTransactions().stream().map(Transaction::getOriginal).collect(Collectors.toSet()));
-                        ((Game) bang).getScheduler().createTaskBuilder()
-                                .delay(ConfigurationManager.getInstance().getConfig().getNode("Undo?", "TNT't_Rollback_Time").getLong(), TimeUnit.SECONDS)
-                                .name("Explosion Repair Task")
-                                .execute(mend::heal)
-                                .submit(this);
+                        
                     }
                 }
             }            
             if (bang.getCause().first(Ghast.class).isPresent()) {
                 if (ConfigurationManager.getInstance().getConfig().getNode("Explosions", "Ghast").getString().equalsIgnoreCase("false")){
                     if (ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Undo_Ghast's_Explosion").getString().equalsIgnoreCase("yes")){
-                        bang.getTransactions();
-                        final Mend mend = new Mend(bang.getTransactions().stream().map(Transaction::getOriginal).collect(Collectors.toSet()));
-                        ((Game) bang).getScheduler().createTaskBuilder()
-                                .delay(ConfigurationManager.getInstance().getConfig().getNode("Undo?", "Ghast_Rollback_Time").getLong(), TimeUnit.SECONDS)
-                                .name("Explosion Repair Task")
-                                .execute(mend::heal)
-                                .submit(this);
+                        
                     }
                 }
             } 
