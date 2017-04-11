@@ -28,16 +28,16 @@ public class ConfigurationManager {
                                 config.getNode("Explosions", "TNT").setValue("true");
                                 config.getNode("Explosions", "Creeper").setValue("true");
                                 config.getNode("Explosions", "Ghast").setValue("true");
-                                config.getNode("Undo?").setComment("Would you like any damage to be undone? YES = Undoes damage || NO = Damage is permenate");
-                                config.getNode("Undo?", "Undo_Creeper_Explosiong").setValue("yes");
-                                config.getNode("Undo?", "Creeper's_Rollback_Time").setComment("in Seconds").setValue("5");
-                                config.getNode("Undo?", "UndoTNT)_Explosiong").setValue("yes");
-                                config.getNode("Undo?", "TNT's_Rollback_Time").setComment("in Seconds").setValue("10");
-                                config.getNode("Undo?", "Undo_Ghast's_Explosion").setValue("yes");
-                                config.getNode("Undo?", "Ghast_Rollback_Time").setValue("10");
-                                config.getNode("DropItems_Creeper").setComment("Do you want Creeper Explosions to Drop Items?  YES = true || NO = false").setValue("false");
-                                config.getNode("DropItems_TNT").setComment("Do you want TNT Explosions to Drop Items?  YES = true || NO = false").setValue("false");
-                                config.getNode("DropItems_Ghast").setComment("Do you want Ghast Explosions to Drop Items?  YES = true || NO = false").setValue("false");
+                                config.getNode("Undo?").setComment("Would you like any damage to be undone?");
+                                config.getNode("Undo?", "Creeper", "Would you like this to Rollback?").setValue("yes");
+                                config.getNode("Undo?", "Creeper", "Time to Heal?").setComment("in Seconds").setValue("5");
+                                config.getNode("Undo?", "TNT", "Would you like this to Rollback?").setValue("yes");
+                                config.getNode("Undo?", "TNT", "Time to Heal?").setComment("in Seconds").setValue("10");
+                                config.getNode("Undo?", "Ghast", "Would you like this to Rollback?").setValue("yes");
+                                config.getNode("Undo?", "Ghast", "Time to Heal?").setValue("10");
+                                config.getNode("Items", "TNT", "Drop").setValue("false");
+                                config.getNode("Items", "Ghast", "Drop").setValue("false");
+                                config.getNode("Items", "Creeper", "Drop").setValue("false");
                                 saveConfig();
                         }
                        
